@@ -67,10 +67,6 @@ The skill never decides refactor-first / refactor-last / don't-refactor. It lays
 
 The structural/behavioral lens, the "tidy first?" framing (the question mark is load-bearing), and the named tidyings all come from Kent Beck's [_Tidy First?_](https://www.oreilly.com/library/view/tidy-first/9781098151232/) (O'Reilly, 2023). This skill applies his ideas — it's no substitute for the book.
 
-## Inspiration
-
-While figuring out how to lay out a skill repo, I looked at [mattpocock/skills](https://github.com/mattpocock/skills), [shadcn/improve](https://github.com/shadcn/improve), and [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills).
-
 ## License
 
 [MIT](LICENSE) © 2026 Danny Tunney
