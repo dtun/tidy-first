@@ -9,6 +9,25 @@ The released version is mirrored in the `metadata.version` field of
 
 ## [Unreleased]
 
+### Added
+
+- `tidy-audit` skill — a read-only, retrospective cleanup auditor and sibling to
+  `tidy-first`. Given a window of already-shipped commits (a GitHub commits URL, a local
+  range, or an `owner/repo` + range), it scans the target repo's own conventions, detects
+  cleanup opportunities against both the reused `TIDIES.md` and a new `ANTIPATTERNS.md`
+  catalog, ranks them, and emits a single markdown **backlog** report — never a history
+  rewrite. Every finding carries `confidence` + `basis`; actionable cleanup is kept separate
+  from observation-only notes about tangled shipped commits.
+- [`skills/tidy-audit/ANTIPATTERNS.md`](skills/tidy-audit/ANTIPATTERNS.md) — the debt-detector
+  catalog (tangled commit, duplication, god-file growth, fat entrypoint, unwrapped I/O,
+  test-colocation drift, vocabulary drift, churn, broadened public surface), each tagged
+  *absolute* or *codebase-relative* and calibrated against the target repo's baseline.
+- [`skills/tidy-audit/AUDIT-FORMAT.md`](skills/tidy-audit/AUDIT-FORMAT.md) — the single-report
+  format: entropy delta, ranked table, per-opportunity detail block, and the **actionable vs
+  observations** split.
+- [`skills/tidy-audit/TIDIES.md`](skills/tidy-audit/TIDIES.md) — a byte-identical copy of
+  `tidy-first`'s catalog so `tidy-audit` installs standalone; kept in sync with the original.
+
 ## [0.1.0] — 2026-06-12
 
 Initial release.
