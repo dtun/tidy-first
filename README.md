@@ -59,13 +59,22 @@ It **reuses** `TIDIES.md` (the structural moves are the fixes it proposes) and a
 
 ## Install
 
-With [skills.sh](https://skills.sh):
+**As a Claude Code plugin** — both skills together, version-tracked, updatable:
+
+```
+/plugin marketplace add dtun/tidy-first
+/plugin install tidy@dtun-skills
+```
+
+They arrive namespaced under the plugin — `tidy:tidy-first` and `tidy:tidy-audit` — and `/plugin update tidy@dtun-skills` pulls a new release.
+
+**With [skills.sh](https://skills.sh)** — one skill at a time:
 
 ```sh
 npx skills add dtun/tidy-first    # or: dtun/tidy-audit
 ```
 
-Or place a skill folder wherever your agent loads skills from — a skill is just a directory containing `SKILL.md`:
+**Or place a skill folder wherever your agent loads skills from** — a skill is just a directory containing `SKILL.md`:
 
 ```sh
 git clone https://github.com/dtun/tidy-first.git

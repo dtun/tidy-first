@@ -16,7 +16,12 @@ agent, not just one tool.
   of `tidy-first`.
 - Each skill's `SKILL.md` is its own entry point; sibling files are references it links to
   relatively. Version and author live in each `SKILL.md` frontmatter (`metadata.version`).
-  Keep that in sync with [`CHANGELOG.md`](CHANGELOG.md) and the git tag on release.
+- The repo root doubles as a **Claude Code plugin and its marketplace**:
+  [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) declares the `tidy` plugin
+  (`"skills": "./skills/"`, so both skills ship together) and
+  [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) lists it with
+  `"source": "./"`. That's why `skills/*` must stay at the repo root — moving it breaks
+  plugin discovery, skills.sh, and every README link at once.
 
 ## Conventions
 
@@ -33,3 +38,15 @@ agent, not just one tool.
   (verify with `diff`).
 - **Work in [Conventional Commits](https://www.conventionalcommits.org/)** — discrete,
   well-scoped commits. Don't force-push or amend without asking.
+
+## Releasing
+
+One version number, declared in three files that must agree:
+
+1. `metadata.version` in [`skills/tidy-first/SKILL.md`](skills/tidy-first/SKILL.md)
+2. `metadata.version` in [`skills/tidy-audit/SKILL.md`](skills/tidy-audit/SKILL.md)
+3. `version` in [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) — Claude Code
+   only ships an update when this string changes, so a forgotten bump leaves users stale
+
+Then move the [`CHANGELOG.md`](CHANGELOG.md) `Unreleased` heading to `X.Y.Z`, update its
+compare links, and tag `vX.Y.Z`. Validate the manifests with `claude plugin validate .`

@@ -4,13 +4,21 @@ All notable changes to this skill are documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-The released version is mirrored in the `metadata.version` field of
-[`skills/tidy-first/SKILL.md`](skills/tidy-first/SKILL.md).
+The released version is mirrored in each skill's `metadata.version` frontmatter field and in
+`.claude-plugin/plugin.json` — see [Releasing](AGENTS.md#releasing).
 
 ## [Unreleased]
 
 ### Added
 
+- **Claude Code plugin distribution.** The repo root is now both a plugin and its own
+  marketplace: [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) declares the `tidy`
+  plugin (`"skills": "./skills/"`, so both skills ship together) and
+  [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) lists it with
+  `"source": "./"`. Install with `/plugin marketplace add dtun/tidy-first` then
+  `/plugin install tidy@dtun-skills`; update with `/plugin update`. Version-tracked, so a new
+  sibling skill ships without a manual folder copy. The existing `skills/*` layout is
+  unchanged, so skills.sh and manual symlink installs keep working.
 - `tidy-audit` skill — a read-only, retrospective cleanup auditor and sibling to
   `tidy-first`. Given a window of already-shipped commits (a GitHub commits URL, a local
   range, or an `owner/repo` + range), it scans the target repo's own conventions, detects
