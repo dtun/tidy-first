@@ -1,0 +1,15 @@
+{
+  "name": "dtun-skills",
+  "owner": {
+    "name": "Danny Tunney",
+    "url": "https://github.com/dtun"
+  },
+  "description": "Agent skills by Danny Tunney.",
+  "plugins": [
+    {
+      "name": "tidy",
+      "source": "./",
+      "description": "tidy-first + tidy-audit — separate structural change from behavioral change, on the way in and looking back."
+    }
+  ]
+}

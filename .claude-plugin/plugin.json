@@ -1,0 +1,21 @@
+{
+  "name": "tidy",
+  "displayName": "Tidy First",
+  "version": "0.1.0",
+  "description": "Two sibling skills that keep structural change and behavioral change apart: tidy-first splits one pending diff into hand-off prompts; tidy-audit scans shipped commits for a ranked refactor: backlog. Both read-only.",
+  "author": {
+    "name": "Danny Tunney",
+    "url": "https://github.com/dtun"
+  },
+  "homepage": "https://github.com/dtun/tidy-first#readme",
+  "repository": "https://github.com/dtun/tidy-first",
+  "license": "MIT",
+  "keywords": [
+    "refactoring",
+    "code-review",
+    "conventional-commits",
+    "tidy-first",
+    "technical-debt"
+  ],
+  "skills": "./skills/"
+}
