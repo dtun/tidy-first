@@ -74,18 +74,48 @@ They arrive namespaced under the plugin — `tidy:tidy-first` and `tidy:tidy-aud
 npx skills add dtun/tidy-first    # or: dtun/tidy-audit
 ```
 
-**Or place a skill folder wherever your agent loads skills from** — a skill is just a directory containing `SKILL.md`:
+**From a clone, with [`install.sh`](install.sh)** — copies every `skills/*` to wherever your agent loads skills from, at a pinned ref:
 
 ```sh
-git clone https://github.com/dtun/tidy-first.git
-ln -s "$PWD/tidy-first/skills/tidy-first" ~/.agents/skills/tidy-first
-ln -s "$PWD/tidy-first/skills/tidy-audit" ~/.agents/skills/tidy-audit
+git clone https://github.com/dtun/tidy-first.git && cd tidy-first
+./install.sh                    # latest tag -> $AGENT_SKILLS_DIR, ~/.agents/skills, or ~/.claude/skills
+./install.sh --ref v0.1.0       # pin a version
+./install.sh --dry-run          # show what would change, touch nothing
+./install.sh --dest ~/somewhere
+```
+
+It discovers skills by looking for `skills/*/SKILL.md`, so a new sibling skill is picked up without editing anything, and it resolves the `~/.claude/skills` → `~/.agents/skills` symlink case rather than installing twice.
+
+**Or symlink them yourself** — a skill is just a directory containing `SKILL.md`:
+
+```sh
+ln -s "$PWD/skills/tidy-first" ~/.agents/skills/tidy-first
+ln -s "$PWD/skills/tidy-audit" ~/.agents/skills/tidy-audit
 ```
 
 Then invoke:
 
 - `/tidy-first <PR url/number | file | dir>`
 - `/tidy-audit <github-commits-url | since [until]> [--path <glob>] [--author <name>] [--top <N>]`
+
+### Am I current?
+
+An installed copy silently drifts behind the repo. `--check` compares each installed skill's `metadata.version` against a ref, reports the gap, and exits non-zero — so it works in a shell prompt or CI step:
+
+```console
+$ ./install.sh --ref main --check
+skills @ main -> /Users/you/.agents/skills
+
+SKILL       INSTALLED  AT REF  STATUS
+tidy-audit  -          0.2.0   not installed
+tidy-first  0.1.0      0.2.0   outdated
+
+2 skills, 2 needing attention
+```
+
+Four states: `up to date`, `outdated` (versions differ), `not installed` (a skill you never picked up — how a new sibling shows up), and `modified` (same version, different bytes — local edits, or a partial hand-copy). Re-run without `--check` to sync.
+
+The canonical version lives in each skill's `SKILL.md` frontmatter (`metadata.version`) and in `.claude-plugin/plugin.json`; plugin installs are tracked by Claude Code itself, so `/plugin update` is the equivalent there.
 
 ## Inputs
 

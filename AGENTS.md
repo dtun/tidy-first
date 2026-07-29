@@ -50,3 +50,9 @@ One version number, declared in three files that must agree:
 
 Then move the [`CHANGELOG.md`](CHANGELOG.md) `Unreleased` heading to `X.Y.Z`, update its
 compare links, and tag `vX.Y.Z`. Validate the manifests with `claude plugin validate .`
+
+[`install.sh`](install.sh) reads `metadata.version` out of `SKILL.md` frontmatter and defaults
+to the latest tag, so an unreleased skill is invisible to `./install.sh` until it's tagged —
+that's intended, but it means the tag is the release, not the merge. `./install.sh --check`
+reports an installed copy's drift against a ref. The script discovers skills by globbing
+`skills/*/SKILL.md` and must stay that way: never hard-code a skill name in it.
