@@ -11,6 +11,16 @@ The released version is mirrored in each skill's `metadata.version` frontmatter 
 
 ### Added
 
+- [`install.sh`](install.sh) — syncs every `skills/*` directory to an agent skills directory
+  at a given git ref (`--ref`, default: the latest tag), for installs outside the plugin
+  system. Discovers skills by globbing `skills/*/SKILL.md`, so a new sibling skill is picked
+  up automatically; resolves the `~/.claude/skills` → `~/.agents/skills` symlink case; drops
+  files that no longer exist at the ref; and leaves unrelated skills in the destination alone.
+  `--dry-run` reports without writing. No dependencies beyond `git`; runs on macOS bash 3.2.
+- **Drift detection** — `./install.sh --check` compares each installed skill's
+  `metadata.version` against a ref and reports `up to date` / `outdated` / `not installed` /
+  `modified` (same version, different bytes), exiting non-zero if any skill needs attention so
+  it can run in a prompt or CI step. Makes a stale install visible without a hand-diff.
 - **Claude Code plugin distribution.** The repo root is now both a plugin and its own
   marketplace: [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) declares the `tidy`
   plugin (`"skills": "./skills/"`, so both skills ship together) and
