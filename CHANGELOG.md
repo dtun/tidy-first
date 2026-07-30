@@ -9,6 +9,11 @@ The released version is mirrored in each skill's `metadata.version` frontmatter 
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-07-30
+
+Adds the `tidy-audit` sibling skill, and makes both skills installable and updatable
+without hand-copying folders.
+
 ### Added
 
 - [`install.sh`](install.sh) — syncs every `skills/*` directory to an agent skills directory
@@ -64,5 +69,6 @@ Initial release.
 - [`HANDOFF-FORMAT.md`](skills/tidy-first/HANDOFF-FORMAT.md) — the per-step
   hand-off package contract and sequence summary table.
 
-[Unreleased]: https://github.com/dtun/tidy-first/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/dtun/tidy-first/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/dtun/tidy-first/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/dtun/tidy-first/releases/tag/v0.1.0
