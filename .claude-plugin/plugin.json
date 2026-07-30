@@ -1,7 +1,7 @@
 {
   "name": "tidy",
   "displayName": "Tidy First",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Two sibling skills that keep structural change and behavioral change apart: tidy-first splits one pending diff into hand-off prompts; tidy-audit scans shipped commits for a ranked refactor: backlog. Both read-only.",
   "author": {
     "name": "Danny Tunney",
